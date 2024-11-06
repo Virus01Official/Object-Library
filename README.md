@@ -1,5 +1,3 @@
----
-
 # ObjectLibrary
 
 `ObjectLibrary` is a simple library for the LÖVE2D game engine that allows users to create objects with collision detection and optional textures. If a texture is not provided, the object defaults to a simple square shape. This library can help developers quickly add basic object collision and rendering to their LÖVE2D projects.
