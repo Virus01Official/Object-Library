@@ -15,7 +15,6 @@ function ObjectLibrary:new(x, y, width, height, imagePath)
     -- Set texture
     if imagePath then
         obj.texture = love.graphics.newImage(imagePath)
-        obj.width, obj.height = obj.texture:getDimensions()
     else
         obj.texture = nil
     end
@@ -30,7 +29,12 @@ end
 -- Draw the object (with or without texture)
 function ObjectLibrary:draw()
     if self.texture then
-        love.graphics.draw(self.texture, self.x, self.y)
+        -- Calculate scaling factors based on the desired width and height
+        local scaleX = self.width / self.texture:getWidth()
+        local scaleY = self.height / self.texture:getHeight()
+        
+        -- Draw the texture with scaling applied
+        love.graphics.draw(self.texture, self.x, self.y, 0, scaleX, scaleY)
     else
         love.graphics.setColor(1, 1, 1) -- white color for the square
         love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
