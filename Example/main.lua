@@ -7,7 +7,7 @@ local speed = 100
 
 function love.load()
     -- Create two objects, one with an image and one without
-    player = ObjectLibrary:new(100, 100, 50, 50) -- assumes you have a player.png
+    player = ObjectLibrary:new(100, 100, 50, 50, "player.png") -- assumes you have a player.png
     wall = ObjectLibrary:new(200, 100, 100, 100) -- no image, defaults to a white square
 end
 
