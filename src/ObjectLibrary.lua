@@ -23,7 +23,43 @@ function ObjectLibrary:new(x, y, width, height, imagePath)
     obj.isCollidable = true
     obj.isColliding = false
 
+    -- Initialize physics properties
+    obj.velocityX = 0
+    obj.velocityY = 0
+    obj.accelerationX = 0
+    obj.accelerationY = 0
+    obj.mass = 1
+    obj.gravity = 500  -- acceleration due to gravity, adjust as needed
+
     return obj
+end
+
+-- Apply force to the object (useful for handling things like gravity or user input)
+function ObjectLibrary:applyForce(fx, fy)
+    self.accelerationX = self.accelerationX + fx / self.mass
+    self.accelerationY = self.accelerationY + fy / self.mass
+end
+
+-- Update the physics of the object (velocity, position)
+function ObjectLibrary:update(dt)
+    -- Apply gravity
+    self:applyForce(0, self.gravity)
+
+    -- Update velocity based on acceleration
+    self.velocityX = self.velocityX + self.accelerationX * dt
+    self.velocityY = self.velocityY + self.accelerationY * dt
+
+    -- Update position based on velocity
+    self.x = self.x + self.velocityX * dt
+    self.y = self.y + self.velocityY * dt
+
+    -- Simple friction to slow down velocity (optional)
+    self.velocityX = self.velocityX * 0.99
+    self.velocityY = self.velocityY * 0.99
+
+    -- Reset accelerations after each update
+    self.accelerationX = 0
+    self.accelerationY = 0
 end
 
 -- Draw the object (with or without texture)
